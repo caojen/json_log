@@ -2,6 +2,15 @@
 name = "json_log"
 version = "0.1.0"
 edition = "2021"
+description = "Log with JSON"
+license = "MIT"
+repository = "https://github.com/caojen/json_log"
+resolver = "1"
+keywords = [
+    "google",
+    "oauth2"
+]
+readme = "README.md"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
