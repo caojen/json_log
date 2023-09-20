@@ -43,7 +43,7 @@ use log::LevelFilter;
 use log::{debug, info, warn, error};
 
 fn main() {
-    json_log::init_with_level(LevelFilter::Debug);
+    json_log::init_with_level(LevelFilter::Debug).unwrap();
     
     let a = 1 + 2 + 3;
     
@@ -74,7 +74,7 @@ struct MyLoggingStruct {
     pub status: u16,
     pub username: String,
     pub method: String,
-    pub headers: Map<String, String>,
+    pub headers: std::collections::HashMap<String, String>,
 }
 
 // Or, ...
@@ -83,7 +83,7 @@ struct MyLoggingStructV2<'a> {
     pub status: u16,
     pub username: &'a str,
     pub method: &'a str,
-    pub headers: Map<&'a str, &'a str>,
+    pub headers: std::collections::HashMap<&'a str, &'a str>,
 }
 ```
 
@@ -97,13 +97,13 @@ use log::LevelFilter;
 static MY_LOGGER: &json_log::JsonLogger = json_log::get_default_logger();
 
 fn main() {
-    json_log::init_with_level(LevelFilter::Debug); // set to debug level
+    json_log::init_with_level(LevelFilter::Debug).unwrap(); // set to debug level
 
     let data = MyLoggingStruct {
         status: 404,
         username: "My name is Jack".to_string(),
         method: "ListMyMoney".to_string(),
-        headers: HashMap::new(),
+        headers: std::collections::HashMap::new(),
     };
 
     MY_LOGGER.info(&data);
