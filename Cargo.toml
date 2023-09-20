@@ -1,5 +1,5 @@
 [package]
-name = "json_logger"
+name = "json_log"
 version = "0.1.0"
 edition = "2021"
 

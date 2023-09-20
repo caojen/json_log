@@ -1,6 +1,6 @@
 # Logger with Json Format
 
-`json_logger` helpers you to print logs in `json` format.
+`json_log` helpers you to print logs in `json` format.
 
 ## Usage
 
@@ -9,7 +9,7 @@ First, add these in your `Cargo.toml`:
 ```toml
 [dependencies]
 log = { version = "0.4" }
-json_logger = { version = "0.1" }
+json_log = { version = "0.1" }
 
 serde = { version = "1", features = ["derive"] } # if you want to log your struct...
 ```
@@ -19,7 +19,7 @@ You need to choose the logging level after the program starts. For example:
 use log::LevelFilter;
 
 fn main() {
-    json_logger::init_with_level(LevelFilter::Info).unwrap(); // use the `INFO` level.
+    json_log::init_with_level(LevelFilter::Info).unwrap(); // use the `INFO` level.
 }
 ```
 
@@ -29,13 +29,13 @@ fn main() {
     // Note: set environment variable `RUST_LOG` to one of these (case insensitive):
     let accepted_RUST_LOG = ["Trace", "Debug", "Info", "Warn", "Error"];
     
-    json_logger::init_env().unwrap();
+    json_log::init_env().unwrap();
 }
 ```
 
 ### Simple Text Logging
 
-`json_logger` is an adapter of the `log` trait. You can use all the `log` features in your code.
+`json_log` is an adapter of the `log` trait. You can use all the `log` features in your code.
 
 For example:
 ```rust
@@ -43,7 +43,7 @@ use log::LevelFilter;
 use log::{debug, info, warn, error};
 
 fn main() {
-    json_logger::init_with_level(LevelFilter::Debug);
+    json_log::init_with_level(LevelFilter::Debug);
     
     let a = 1 + 2 + 3;
     
@@ -94,10 +94,10 @@ use std::collections::HashMap;
 use log::LevelFilter;
 
 // A static reference, you can define it everywhere.
-static MY_LOGGER: &json_logger::JsonLogger = json_logger::get_default_logger();
+static MY_LOGGER: &json_log::JsonLogger = json_log::get_default_logger();
 
 fn main() {
-    json_logger::init_with_level(LevelFilter::Debug); // set to debug level
+    json_log::init_with_level(LevelFilter::Debug); // set to debug level
 
     let data = MyLoggingStruct {
         status: 404,
