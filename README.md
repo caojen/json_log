@@ -109,3 +109,5 @@ fn main() {
     MY_LOGGER.info(&data);
 }
 ```
+
+For more examples, see `./examples`.
