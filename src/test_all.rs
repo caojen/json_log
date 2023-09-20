@@ -6,7 +6,7 @@ use serde::Serialize;
 
 use crate::{get_default_logger, JsonLogger};
 
-static MY_LOGGER: &'static JsonLogger = get_default_logger();
+static MY_LOGGER: &JsonLogger = get_default_logger();
 
 fn init() -> Result<(), SetLoggerError> {
     log::set_logger(MY_LOGGER)
@@ -106,5 +106,5 @@ fn test_http_full() {
         time: 8,
     };
 
-    test_all_log(&http);
+    test_all_log(http);
 }

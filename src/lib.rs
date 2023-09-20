@@ -10,7 +10,7 @@ const LOGGER: JsonLogger = JsonLogger;
 
 impl log::Log for JsonLogger {
     fn enabled(&self, _: &Metadata) -> bool {
-        return true
+        true
     }
 
     fn log(&self, record: &Record) {
@@ -21,7 +21,7 @@ impl log::Log for JsonLogger {
         let line = format!("{}", record.args());
         let msg = msg::Msg::new(record.level(), &line);
 
-        LOGGER.do_log(record.level(), &msg);
+        LOGGER.do_log(record.level(), msg);
     }
 
     fn flush(&self) {}
@@ -41,7 +41,7 @@ impl JsonLogger {
             },
             Err(e) => {
                 let marshal_error = format!("Marshal Error: {}", e);
-                self.do_log(level, &marshal_error)
+                self.do_log(level, marshal_error)
             }
         }
     }
@@ -68,5 +68,5 @@ impl JsonLogger {
 }
 
 pub const fn get_default_logger() -> &'static JsonLogger {
-    return &LOGGER
+    &LOGGER
 }
