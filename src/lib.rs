@@ -28,6 +28,7 @@ impl log::Log for JsonLogger {
 }
 
 impl JsonLogger {
+    #[allow(clippy::only_used_in_recursion)]
     fn do_log<T: Serialize>(&self, level: log::Level, custom: T) {
         let msg = msg::Msg::new(level, &custom);
 
