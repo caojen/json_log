@@ -4,6 +4,7 @@ mod test_all;
 use log::{Metadata, Record};
 use serde::Serialize;
 
+#[non_exhaustive]
 pub struct JsonLogger;
 
 const LOGGER: JsonLogger = JsonLogger;
@@ -19,9 +20,8 @@ impl log::Log for JsonLogger {
         }
 
         let line = format!("{}", record.args());
-        let msg = msg::Msg::new(record.level(), &line);
 
-        LOGGER.do_log(record.level(), msg);
+        LOGGER.do_log(record.level(), line);
     }
 
     fn flush(&self) {}
@@ -70,4 +70,25 @@ impl JsonLogger {
 
 pub const fn get_default_logger() -> &'static JsonLogger {
     &LOGGER
+}
+
+pub fn init_with_level(level: log::LevelFilter) -> Result<(), log::SetLoggerError> {
+    log::set_logger(&LOGGER)
+        .map(|()| log::set_max_level(level))
+}
+
+pub fn init_from_env() -> Result<(), log::SetLoggerError> {
+    let level = match std::env::var("RUST_LOG") {
+        Err(_) => log::LevelFilter::Off,
+        Ok(s) => match s.to_lowercase().as_str() {
+            "trace" => log::LevelFilter::Trace,
+            "debug" => log::LevelFilter::Debug,
+            "info" => log::LevelFilter::Info,
+            "warn" => log::LevelFilter::Warn,
+            "error" => log::LevelFilter::Error,
+            _ => log::LevelFilter::Off,
+        }
+    };
+
+    init_with_level(level)
 }

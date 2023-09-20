@@ -4,7 +4,7 @@ use std::collections::HashMap;
 use log::{debug, error, info, LevelFilter, SetLoggerError, trace, warn};
 use serde::Serialize;
 
-use crate::{get_default_logger, JsonLogger};
+use crate::{get_default_logger, init_with_level, JsonLogger};
 
 static MY_LOGGER: &JsonLogger = get_default_logger();
 
@@ -107,4 +107,19 @@ fn test_http_full() {
     };
 
     test_all_log(http);
+}
+
+#[test]
+fn test_example_text() {
+    init_with_level(LevelFilter::Debug).unwrap();
+
+    let a = 1 + 2 + 3;
+
+    debug!("debug");
+    info!("a = {a}");
+    if a == 6 {
+        warn!("a is {}", a);
+    } else {
+        error!("unknown error: a should be {}, but got {a}", 6);
+    }
 }
