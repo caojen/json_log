@@ -17,7 +17,7 @@ fn simple_text() {
     if a == 7 {
         warn!("a is {}", a);
     } else {
-        error!("unknown error: a should be {}, but got {a}", 6);
+        error!("unknown error: a should be {}, but got {a}", 7);
     }
 }
 
