@@ -7,8 +7,8 @@ license = "MIT"
 repository = "https://github.com/caojen/json_log"
 resolver = "1"
 keywords = [
-    "google",
-    "oauth2"
+    "logger",
+    "JSON",
 ]
 readme = "README.md"
 
