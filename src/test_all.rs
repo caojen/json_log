@@ -10,7 +10,7 @@ static MY_LOGGER: &JsonLogger = get_default_logger();
 
 fn init() -> Result<(), SetLoggerError> {
     log::set_logger(MY_LOGGER)
-        .map(|()| log::set_max_level(LevelFilter::Error))
+        .map(|()| log::set_max_level(LevelFilter::Warn))
 }
 
 fn test_all_log<T: Serialize>(msg: T) {

@@ -46,24 +46,60 @@ impl JsonLogger {
             }
         }
     }
+}
 
+impl JsonLogger {
+    #[inline]
+    fn should_log(&self, level: log::LevelFilter) -> bool {
+        if log::max_level() == log::LevelFilter::Off {
+            return false;
+        }
+
+        return log::max_level() >= level;
+    }
+
+    #[inline]
     pub fn trace<T: Serialize>(&self, msg: T) {
+        if !self.should_log(log::LevelFilter::Trace) {
+            return
+        }
+
         self.do_log(log::Level::Trace, msg)
     }
 
+    #[inline]
     pub fn debug<T: Serialize>(&self, msg: T) {
+        if !self.should_log(log::LevelFilter::Debug) {
+            return
+        }
+
         self.do_log(log::Level::Debug, msg)
     }
 
+    #[inline]
     pub fn info<T: Serialize>(&self, msg: T) {
+        if !self.should_log(log::LevelFilter::Info) {
+            return
+        }
+
         self.do_log(log::Level::Info, msg)
     }
 
+    #[inline]
     pub fn warn<T: Serialize>(&self, msg: T) {
+        if !self.should_log(log::LevelFilter::Warn) {
+            return
+        }
+
         self.do_log(log::Level::Warn, msg)
     }
 
+    #[inline]
     pub fn error<T: Serialize>(&self, msg: T) {
+        if !self.should_log(log::LevelFilter::Error) {
+            return
+        }
+
         self.do_log(log::Level::Error, msg)
     }
 }
